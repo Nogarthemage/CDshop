@@ -1,0 +1,13 @@
+.productlist{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.productlist li{
+	float: left;
+	display: inline-block;
+	background-color: red;
+	width: 33.33%;
+	height: 150px;
+}
