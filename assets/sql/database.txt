@@ -1,0 +1,146 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Dec 17, 2018 at 09:21 PM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `cdshop`
+--
+CREATE DATABASE IF NOT EXISTS `cdshop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `cdshop`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `orderid` int(9) NOT NULL,
+  `orderdate` datetime NOT NULL,
+  `totalprice` int(9) NOT NULL,
+  `userid` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Truncate table before insert `orders`
+--
+
+TRUNCATE TABLE `orders`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `orderid` int(9) NOT NULL,
+  `productid` int(9) NOT NULL,
+  `quantity` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Truncate table before insert `order_detail`
+--
+
+TRUNCATE TABLE `order_detail`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `productid` int(9) NOT NULL,
+  `artist` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `cover` varchar(255) NOT NULL,
+  `genre` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `releasedate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Truncate table before insert `product`
+--
+
+TRUNCATE TABLE `product`;
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `genre`, `type`, `releasedate`) VALUES
+(1, 'Hooverphonic', 'Looking for stars', '', '1_cd.jpg', 'pop', 'album', '2018-11-16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `userid` int(9) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` varchar(255) NOT NULL,
+  `regdate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Truncate table before insert `user`
+--
+
+TRUNCATE TABLE `user`;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orderid`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`productid`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`userid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT;
