@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Dec 17, 2018 at 09:21 PM
--- Server version: 5.7.23
--- PHP Version: 7.2.8
+-- Host: localhost:3306
+-- Generation Time: Dec 18, 2018 at 02:59 PM
+-- Server version: 5.6.34-log
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
@@ -22,6 +24,7 @@ USE `cdshop`;
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `orderid` int(9) NOT NULL,
   `orderdate` datetime NOT NULL,
@@ -29,34 +32,26 @@ CREATE TABLE `orders` (
   `userid` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `orders`
---
-
-TRUNCATE TABLE `orders`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `order_detail`
 --
 
+DROP TABLE IF EXISTS `order_detail`;
 CREATE TABLE `order_detail` (
   `orderid` int(9) NOT NULL,
   `productid` int(9) NOT NULL,
   `quantity` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `order_detail`
---
-
-TRUNCATE TABLE `order_detail`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `productid` int(9) NOT NULL,
   `artist` varchar(255) NOT NULL,
@@ -69,16 +64,31 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncate table before insert `product`
---
-
-TRUNCATE TABLE `product`;
---
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `genre`, `type`, `releasedate`) VALUES
-(1, 'Hooverphonic', 'Looking for stars', '', '1_cd.jpg', 'pop', 'album', '2018-11-16');
+(1, 'The Back Eyed Peas', 'I Gotta Feeling', '', '1.jpg', 'Pop', 'Single', '2009-06-16'),
+(2, 'Shania Twain', 'Come On Over', '', '2.jpg', 'Country', 'Album', '1997-11-04'),
+(3, 'Santana ft. Rob Thomas', 'Smooth', '', '3.jpg', 'Rock', 'Single', '1999-06-29'),
+(4, 'Nas', 'Illmatic', '', '4.jpg', 'Hip-Hop', 'Album', '1994-04-19'),
+(5, 'Chic and Nile Rodgers', 'Up All Night', '', '5.jpg', 'Disco', 'Album', '2013-07-01'),
+(6, 'LeAnn Rimes', 'How Do I Live', '', '6.jpg', 'Country', 'Single', '1999-05-27'),
+(7, 'Kool & The Gang', 'Open Sesame', '', '7.jpg', 'Disco', 'Album', '1976-11-01'),
+(8, 'Olivia Newton-John', 'Physical', '', '8.jpg', 'Pop', 'Single', '1981-09-28'),
+(9, 'David Bowie', 'Heathen', '', '9.jpg', 'Rock', 'Album', '2002-06-11'),
+(10, 'Ratatat', 'Classics', '', '10.jpg', 'Rock', 'Album', '2006-08-22'),
+(11, 'Chic', 'Le Freak', '', '11.jpg', 'Disco', 'Single', '1978-09-21'),
+(12, 'Tupac Shakur', 'All Eyez on Me', '', '12.jpg', 'Hip-Hop', 'Album', '1996-02-13'),
+(13, 'Survivor', 'Eye Of The Tiger', '', '13.jpg', 'Rock', 'Single', '1982-02-01'),
+(14, 'Flo Rida ft. T Pain', 'Low', '', '14.jpg', 'Hip-Hop', 'Single', '2007-10-09'),
+(15, 'Taylor Swift', 'Fearless', '', '15.jpg', 'Country', 'Album', '2008-11-11'),
+(16, 'Adele', 'Rolling in the Deep', '', '16.jpg', 'Pop', 'Single', '2011-11-29'),
+(17, 'Eli Young Band', 'Love Ain\'t', '', '17.jpg', 'Country', 'Single', '2018-05-26'),
+(18, 'ABBA', 'Gold: Greatest Hits', '', '18.jpg', 'Pop', 'Album', '1992-09-21'),
+(19, 'Earth, Wind & Fire', 'September', '', '19.jpg', 'Disco', 'Single', '1978-11-18'),
+(20, 'Outkast', 'Ms. Jackson', '', '20.jpg', 'Hip-Hop', 'Single', '2000-10-24'),
+(21, 'Justin Bieber', 'Believe', '', '21.jpg', 'Pop', 'Album', '2012-06-15');
 
 -- --------------------------------------------------------
 
@@ -86,6 +96,7 @@ INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `g
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userid` int(9) NOT NULL,
   `firstname` varchar(255) NOT NULL,
@@ -96,11 +107,6 @@ CREATE TABLE `user` (
   `regdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `user`
---
-
-TRUNCATE TABLE `user`;
 --
 -- Indexes for dumped tables
 --
@@ -132,15 +138,13 @@ ALTER TABLE `user`
 --
 ALTER TABLE `orders`
   MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT;COMMIT;
