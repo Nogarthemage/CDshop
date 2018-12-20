@@ -1,26 +1,14 @@
+<?php include('assets/incl/global.php'); ?>
 <?php
 
-use CDshop\User;
-
-session_start();
+    use CDshop\User;
 
     spl_autoload_register(function ($class) {
         include_once("classes/". str_replace('\\', '/', $class) . ".class.php");
     });
 
-    try {
-
-        if (!empty($_POST)) {
-            $email = $_POST['email'];
-            $password = $_POST["password"];
-
-            $user = new User();
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->login();
-        }
-    } catch (Exception $e) {
-        $error = $e->getMessage();
+    if(!$isUserLoggedIn ){
+            header('Location: login.php');
     }
 
 ?><!doctype html>
@@ -29,7 +17,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CD shop - Login</title>
+    <title>CD shop - Profile</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/foundation.css">
     <link rel="stylesheet" href="assets/css/all.css">
@@ -38,11 +26,11 @@ session_start();
   <body>
 
 
-       <?php include('assets/incl/header.php'); ?>
+      <?php include('assets/incl/header.php'); ?>
 
       <div class="row">
             <div class="large-12 columns">
-               <h1>Log in</h1
+               <h1>Your Profile</h1>
             </div>
       </div>
 
@@ -55,29 +43,29 @@ session_start();
                     <form action="" method="post">
                         <div class="row">
                               <div class="large-4 columns">
+                                  <label>First name</label>
+                              </div>
+                              <div class="large-8 columns">
+                                  <?php echo $firstname; ?>
+                              </div>
+                        </div>
+                        <div class="row">
+                              <div class="large-4 columns">
+                                  <label>Last name</label>
+                              </div>
+                              <div class="large-8 columns">
+                                  <?php echo $lastname; ?>
+                              </div>
+                        </div>
+                        <div class="row">
+                              <div class="large-4 columns">
                                   <label>E-mail</label>
                               </div>
                               <div class="large-8 columns">
-                                  <input type="text" name="email" >
-                              </div>
-                        </div>
-                        <div class="row">
-                              <div class="large-4 columns">
-                                  <label>Password</label>
-                              </div>
-                              <div class="large-8 columns">
-                                  <input type="password" name="password" >
+                                  <?php echo $email; ?>
                               </div>
                         </div>
 
-                        <div class="row">
-                              <div class="large-4 columns">
-
-                              </div>
-                              <div class="large-8 columns">
-                                  <input type="submit" value="Log in">
-                              </div>
-                        </div>
 
                         <div class="row">
                             <div class="large-12 columns">
@@ -94,6 +82,13 @@ session_start();
 
                 </div>
 
+            </div>
+      </div>
+
+
+      <div class="row">
+            <div class="large-12 columns">
+               <h1>Your Orders</h1>
             </div>
       </div>
 

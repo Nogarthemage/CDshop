@@ -1,12 +1,8 @@
+<?php include('assets/incl/global.php'); ?>
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
     use CDshop\User;
     use CDshop\Product;
-
-    session_start();
 
     spl_autoload_register(function ($class) {
         include_once("classes/". str_replace('\\', '/', $class) . ".class.php");
@@ -14,13 +10,7 @@ error_reporting(E_ALL);
 
     $product = new Product();
     $allProducts = $product->getProducts();
-
-
-    //is the user logged in, then ID will be set!
-    $isUserLoggedIn  = isset($_SESSION['id']) ? true : false;
-    $firstname       = isset($_SESSION['firstname']) ? $_SESSION['firstname'] : '';
-    $level           = isset($_SESSION['level']) ? $_SESSION['level'] : '';
-    $isAdmin         = ( isset($_SESSION['level']) && $_SESSION['level'] == 'admin' ) ? true : false;
+    $banners = $product->getProductBanners();
 
 ?><!doctype html>
 <html class="no-js" lang="en" dir="ltr">
@@ -36,106 +26,39 @@ error_reporting(E_ALL);
   </head>
   <body>
 
-      <?php if($isAdmin){ ?>
-      <div class="bar">
-           <div class="callout primary">
-          <div class="row">
-                <div class="medium-12 columns">
-                          This is an admin bar
-                </div>
-          </div>
-           </div>
-      </div>
-      <?php } ?>
-
-
-      <?php if($isUserLoggedIn){ ?>
-          <div class="bar">
-              <div class="row">
-                    <div class="medium-6 columns">
-                        <ul class="menu">
-                           <li><a href="/">CDSHOP</a></li>
-                         </ul>
-                    </div>
-                    <div class="medium-6 columns text-right">
-                        <ul class="menu">
-                           <li><a href="logout.php">Logout</a></li>
-                           <li><a href="order.php"><i class="fas fa-shopping-cart"></i> Shoppingcart</a></li>
-                         </ul>
-                    </div>
-              </div>
-          </div>
-
-          <div class="row">
-                 <div class="large-12 columns">
-                        <div class="callout primary">
-                               Welcome to the webshop <?php echo $firstname ?>!!
-                        </div>
-                 </div>
-          </div>
-
-    <?php }else{ ?>
-        <div class="bar">
-            <div class="row">
-                  <div class="medium-6 columns">
-                      <ul class="menu">
-                         <li><a href="/">CDSHOP</a></li>
-                       </ul>
-                  </div>
-                  <div class="medium-6 columns text-right">
-                      <ul class="menu">
-                         <li><a href="login.php">Login</a></li>
-                         <li><a href="register.php">Register</a></li>
-                         <li><a href="login.php"><i class="fas fa-shopping-cart"></i> Shoppingcart</a></li>
-                       </ul>
-                  </div>
-            </div>
-        </div>
-    <?php } ?>
-
-
+      <?php include('assets/incl/header.php'); ?>
 
       <div class="row">
             <div class="large-12 columns">
-                <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+                <div class="banners orbit" role="region" aria-label="" data-orbit>
                   <div class="orbit-wrapper">
                     <div class="orbit-controls">
                       <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
                       <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
                     </div>
                     <ul class="orbit-container">
+                      <?php
+                      if(!empty($banners) > 0)
+                      {
+                          foreach($banners as $banner)
+                          {
+                       ?>
+
                       <li class="is-active orbit-slide">
+                        <a href="detail.php?productid=<?php echo $banner['productid']; ?>">
                         <figure class="orbit-figure">
-                          <img class="orbit-image" src="https://placehold.it/1200x600/999?text=Slide-1" alt="Space">
-                          <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
+                          <img class="orbit-image" src="assets/img/cds/<?php echo $banner['banner']; ?>" alt="<?php echo $banner['name']; ?>">
                         </figure>
+                        </a>
                       </li>
-                      <li class="orbit-slide">
-                        <figure class="orbit-figure">
-                          <img class="orbit-image" src="https://placehold.it/1200x600/888?text=Slide-2" alt="Space">
-                          <figcaption class="orbit-caption">Lets Rocket!</figcaption>
-                        </figure>
-                      </li>
-                      <li class="orbit-slide">
-                        <figure class="orbit-figure">
-                          <img class="orbit-image" src="https://placehold.it/1200x600/777?text=Slide-3" alt="Space">
-                          <figcaption class="orbit-caption">Encapsulating</figcaption>
-                        </figure>
-                      </li>
-                      <li class="orbit-slide">
-                        <figure class="orbit-figure">
-                          <img class="orbit-image" src="https://placehold.it/1200x600/666&text=Slide-4" alt="Space">
-                          <figcaption class="orbit-caption">Outta This World</figcaption>
-                        </figure>
-                      </li>
+
+                      <?php
+                          }
+                      } ?>
+
                     </ul>
                   </div>
-                  <nav class="orbit-bullets">
-                    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-                    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-                    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-                    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
-                  </nav>
+
                 </div>
             </div>
       </div>

@@ -22,7 +22,6 @@ class User
         public function setFirstname($firstname)
         {
             if (!empty($firstname)) {
-                /* field is not empty */
                 $this->firstname = $firstname;
             } else {
                 throw new Exception("Please fill in your first name.");
@@ -38,7 +37,6 @@ class User
         public function setLastname($lastname)
         {
             if (!empty($lastname)) {
-                /* field is not empty */
                 $this->lastname = $lastname;
             } else {
                 throw new Exception("Please fill in your last name.");
@@ -54,7 +52,6 @@ class User
         public function setEmail($email)
         {
             if (!empty($email)) {
-                /* field is not empty */
                 $this->email = $email;
             } else {
                 throw new Exception("Please fill in a your email.");
@@ -69,11 +66,10 @@ class User
 
         public function setPassword($password)
         {
-            if (strlen($password)>=6) {
-                /* field value is bigger as 6 characters */
+            if (!empty($password)) {
                 $this->password = $password;
             } else {
-                throw new Exception("Please fill in password with at least 6 characters.");
+                throw new Exception("Please fill a password.");
             }
         }
 
@@ -106,12 +102,19 @@ class User
             return $res;
         }
 
+        public function getUsers()
+        {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("SELECT * FROM user ORDER BY regdate DESC");
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+            return $users;
+        }
+
+
         public function register()
         {
-            echo 'registering';
             try {
-
-
 
                 $conn = Db::getInstance();
 
@@ -122,12 +125,9 @@ class User
                 $statement->execute();
                 $res = $statement->fetch();
 
-
-
                 if (!empty($res)) {
                     throw new Exception("This email has already been used.");
                 } else {
-
 
                     $options=
                     [
@@ -159,7 +159,7 @@ class User
         $stmt = $conn->prepare("SELECT id
                                 FROM user
                                 WHERE email=:email");
-        $stmt->bindValue(':email', $_SESSION['email']);
+        $stmt->bindValue(':email', $_SESSION['user_email']);
         $stmt->execute();
         $res = $stmt->fetch();
         $lastUserId = $res['id'];
@@ -196,11 +196,11 @@ class User
 
         if ($statement->rowCount() == 1 && password_verify($this->getPassword(), $user['password'])) {
 
-            $_SESSION["firstname"] = $user["firstname"];
-            $_SESSION["lastname"] = $user["lastname"];
-            $_SESSION["email"] = $user["email"];
-            $_SESSION["level"] = $user["level"];
-            $_SESSION["id"] = $user["userid"];
+            $_SESSION["user_firstname"] = $user["firstname"];
+            $_SESSION["user_lastname"] = $user["lastname"];
+            $_SESSION["user_email"] = $user["email"];
+            $_SESSION["user_level"] = $user["level"];
+            $_SESSION["user_id"] = $user["userid"];
 
             header("Location: index.php");
         } else {
@@ -210,21 +210,21 @@ class User
 
     public function update()
     {
-        $_SESSION["firstname"] = $this->firstname;
-        $_SESSION["lastname"] = $this->lastname;
-        $_SESSION["email"] = $this->email;
-        $_SESSION["password"] = $this->password;
+        $_SESSION["user_firstname"] = $this->firstname;
+        $_SESSION["user_lastname"] = $this->lastname;
+        $_SESSION["user_email"] = $this->email;
+        $_SESSION["user_password"] = $this->password;
         $conn = Db::getInstance();
         if (empty($this->password)) {
             $statement = $conn->prepare("UPDATE users
                                         SET firstname = :firstname, lastname = :lastname, email = :email
-                                        WHERE id = :id");
+                                        WHERE userid = :id");
         } elseif (strlen($this->password) < 6) {
             throw new Exception("Please fill in password with at least 6 characters.");
         } else {
             $statement = $conn->prepare("UPDATE users
                                         SET firstname = :firstname, lastname = :lastname, email = :email, password = :password
-                                        WHERE id = :id");
+                                        WHERE userid = :id");
             $options = ["cost" => 12];
             $hash = password_hash($this->password, PASSWORD_DEFAULT, $options);
             $statement->bindValue(":password", $hash);
@@ -232,7 +232,7 @@ class User
         $statement->bindValue(":firstname", $this->getFirstname());
         $statement->bindValue(":lastname", $this->getLastname());
         $statement->bindValue(":email", $this->getEmail());
-        $statement->bindValue(":id", $_SESSION["id"]);
+        $statement->bindValue(":id", $_SESSION["user_id"]);
         return $statement->execute();
     }
 
@@ -250,7 +250,7 @@ class User
 
     public function deleteUser()
     {
-        $userId = $_SESSION['id'];
+        $userId = $_SESSION['user_id'];
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("DELETE FROM user
@@ -263,8 +263,8 @@ class User
     public function checkLevel()
     {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT level FROM user WHERE id = :id");
-            $statement->bindValue(":id", $_SESSION["USER_id"]);
+            $statement = $conn->prepare("SELECT level FROM user WHERE userid = :id");
+            $statement->bindValue(":id", $_SESSION["user_id"]);
             $statement->execute();
             $res = $statement->fetch();
             return $res;
@@ -274,7 +274,7 @@ class User
     {
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT level FROM user WHERE userid = :id");
-            $statement->bindValue(":id", $_SESSION["USER_id"]);
+            $statement->bindValue(":id", $_SESSION["user_id"]);
             $statement->execute();
             $res = $statement->fetch()['level'];
 
@@ -289,7 +289,7 @@ class User
     {
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT level FROM user WHERE userid = :id");
-            $statement->bindValue(":id", $_SESSION["USER_id"]);
+            $statement->bindValue(":id", $_SESSION["user_id"]);
             $statement->execute();
             $res = $statement->fetch()['level'];
 
@@ -302,18 +302,15 @@ class User
 
     public function isRegistered()
     {
-            if(isset($_SESSION["USER_id"])){
-                $conn = Db::getInstance();
-                $statement = $conn->prepare("SELECT level FROM user WHERE userid = :id");
-                $statement->bindValue(":id", $_SESSION["USER_id"]);
-                $statement->execute();
-                $res = $statement->fetch()['level'];
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT level FROM user WHERE userid = :id");
+        $statement->bindValue(":id", $_SESSION["user_id"]);
+        $statement->execute();
+        $res = $statement->fetch()['level'];
 
-                if( ($res == "member") || ($res === "admin") ) {
-                    return true;
-                }
-            }
-            return false;
+        if( ($res == "member") || ($res === "admin") ) {
+            return true;
+        }
 
     }
 

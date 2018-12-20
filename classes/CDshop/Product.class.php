@@ -33,6 +33,20 @@ class Product
         }
     }
 
+    public function getProductBanners()
+    {
+        try {
+            $conn = Db::getInstance();
+            $stmt = $conn->prepare("SELECT * from product WHERE banner != '' ORDER BY productid DESC");
+            $stmt->execute();
+            $products = $stmt->fetchAll();
+            return $products;
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            return $error;
+        }
+    }
+
     public function searchProducts($query)
     {
         //todo

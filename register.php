@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 use CDshop\User;
 
@@ -25,10 +22,10 @@ session_start();
             $user->setLastname($lastname);
             $user->setEmail($email);
             $user->setPassword($password);
-            $user->setLevel('user');
+            $user->setLevel('member');
             $user->register();
             $_SESSION['register'] = "true";
-            header('Location: registered.php');
+            header('Location: login.php');
         }
     } catch (Exception $e) {
         $error = $e->getMessage();
@@ -40,7 +37,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CD shop - Register</title>
+    <title>CD shop - Registration</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/foundation.css">
     <link rel="stylesheet" href="assets/css/all.css">
@@ -49,22 +46,7 @@ session_start();
   <body>
 
 
-      <div class="bar">
-          <div class="row">
-                <div class="medium-6 columns">
-                    <ul class="menu">
-                       <li><a href="/">CDSHOP</a></li>
-                     </ul>
-                </div>
-                <div class="medium-6 columns text-right">
-                    <ul class="menu">
-                       <li><a href="login.php">Login</a></li>
-                       <li><a href="register.php">Register</a></li>
-                       <li><a href="login.php"><i class="fas fa-shopping-cart"></i> Shoppingcart</a></li>
-                     </ul>
-                </div>
-          </div>
-      </div>
+       <?php include('assets/incl/header.php'); ?>
 
       <div class="row">
             <div class="large-12 columns">
@@ -78,13 +60,13 @@ session_start();
             <div class="medium-6 columns medium-centered">
                 <div class="callout">
 
-                    <form action="" method="post">
+                    <form id="registrationform" action="" method="post">
                         <div class="row">
                               <div class="large-4 columns">
                                   <label>First name</label>
                               </div>
                               <div class="large-8 columns">
-                                  <input type="text" name="firstname" >
+                                  <input id="firstname" type="text" name="firstname" >
                               </div>
                         </div>
                         <div class="row">
@@ -108,7 +90,7 @@ session_start();
                                   <label>Password</label>
                               </div>
                               <div class="large-8 columns">
-                                  <input type="text" name="password" >
+                                  <input type="password" name="password" >
                               </div>
                         </div>
 
@@ -121,17 +103,22 @@ session_start();
                               </div>
                         </div>
 
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <?php if (isset($error)): ?>
-                                        <div class="callout alert">
-                                            <?php echo $error; ?>
-                                        </div>
-                                <?php endif; ?>
+                        <div class="errorfield" style="display:none;">
+                            <div class="callout alert">
+                             Please fill in all the fields.
                             </div>
                         </div>
 
                     </form>
+
+
+                    <div class="form-success" style="display:none">
+                        Thanks for registering.<br>
+                        <a href="login.php">You can now log in.</a>
+                    </div>
+                    <div class="form-error" style="display:none">
+                         Something went wrong, please try again.
+                    </div>
 
 
                 </div>
@@ -143,5 +130,6 @@ session_start();
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/foundation.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/form-validation-register.js"></script>
   </body>
 </html>
