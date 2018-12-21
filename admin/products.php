@@ -34,6 +34,15 @@
           <div class="medium-12 columns">
                 <h1>Product Administration</h1>
 <a href="product-add.php" class="button"><i class="fas fa-plus-square"></i> Add Product</a>
+
+<div class="row">
+    <div class="large-12 columns">
+                <div class="callout alert" style="display:none;">
+
+                </div>
+    </div>
+</div>
+
                 <table>
                   <thead>
                     <tr>
@@ -54,8 +63,17 @@
                           <tr>
                             <td><?php echo $product['name']; ?></td>
                             <td><?php echo $product['artist']; ?></td>
-                            <td class="text-right"><a href="product-edit.php?id=<?php echo $user['userid']; ?>" class="button"><i class="far fa-edit"></i> Edit</a>
-                            <a href="product-remove.php?id=<?php echo $user['userid']; ?>" class="button"><i class="fas fa-trash-alt"></i> Remove</a></td>
+                            <td class="text-right">
+                                <form class="form-edit-product">
+                                      <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>" >
+                                      <input type="submit" value="Edit" class="button" />
+                                </form>
+
+                                <form class="form-remove-product">
+                                      <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>" >
+                                      <input type="submit" value="Remove" class="button" >
+                                </form>
+                            </td>
                           </tr>
 
                       <?php
@@ -78,5 +96,7 @@
     <script src="../assets/js/vendor/jquery.js"></script>
     <script src="../assets/js/vendor/foundation.js"></script>
     <script src="../assets/js/app.js"></script>
+
+    <script src="../assets/js/form-product-remove.js"></script>
   </body>
 </html>

@@ -12,7 +12,6 @@
 
     $user = new User();
     $users = $user->getUsers();
-
 ?><!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
@@ -34,6 +33,14 @@
           <div class="medium-12 columns">
                 <h1>User Administration</h1>
                 <a href="user-add.php" class="button"><i class="fas fa-plus-square"></i> Add User</a>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                                <div class="callout alert" style="display:none;">
+
+                                </div>
+                    </div>
+                </div>
 
                 <table>
                       <thead>
@@ -60,8 +67,16 @@
                                 <td><?php echo $user['email']; ?></td>
                                 <td><?php echo $user['level'] ?></td>
                                 <td class="text-right">
-                                <a href="user-edit.php?id=<?php echo $user['userid']; ?>" class="button"><i class="far fa-edit"></i> Edit</a>
-                                <a href="user-remove.php?id=<?php echo $user['userid']; ?>" class="button"><i class="fas fa-trash-alt"></i> Remove</a></td>
+
+                                <form class="form-edit-user">
+                                      <input type="hidden" name="userid" value="<?php echo $user['userid']; ?>" >
+                                      <input type="submit" value="Edit" class="button" />
+                                </form>
+
+                                <form class="form-remove-user">
+                                      <input type="hidden" name="userid" value="<?php echo $user['userid']; ?>" >
+                                      <input type="submit" value="Remove" class="button" >
+                                </form>
                               </tr>
 
                           <?php
@@ -81,8 +96,12 @@
 
 
 
+
     <script src="../assets/js/vendor/jquery.js"></script>
     <script src="../assets/js/vendor/foundation.js"></script>
     <script src="../assets/js/app.js"></script>
+
+    <script src="../assets/js/form-user-remove.js"></script>
+
   </body>
 </html>

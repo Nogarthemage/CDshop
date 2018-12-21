@@ -47,6 +47,15 @@ class Product
         }
     }
 
+    public function deleteProduct($productid)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("DELETE FROM product WHERE productid=:id");
+        $statement->bindValue(':id', $productid);
+        return $statement->execute();
+    }
+
     public function searchProducts($query)
     {
         //todo

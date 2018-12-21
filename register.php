@@ -1,37 +1,4 @@
-<?php
-
-use CDshop\User;
-
-session_start();
-
-    spl_autoload_register(function ($class) {
-        include_once("classes/". str_replace('\\', '/', $class) . ".class.php");
-    });
-
-
-    try {
-        if (!empty($_POST)) {
-
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
-            $password = $_POST["password"];
-
-            $user = new User();
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->setLevel('member');
-            $user->register();
-            $_SESSION['register'] = "true";
-            header('Location: login.php');
-        }
-    } catch (Exception $e) {
-        $error = $e->getMessage();
-    }
-
-?><!doctype html>
+<!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">

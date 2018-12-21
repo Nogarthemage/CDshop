@@ -54,7 +54,7 @@ class User
             if (!empty($email)) {
                 $this->email = $email;
             } else {
-                throw new Exception("Please fill in a your email.");
+                throw new Exception("Please fill in your email.");
             }
         }
 
@@ -69,7 +69,7 @@ class User
             if (!empty($password)) {
                 $this->password = $password;
             } else {
-                throw new Exception("Please fill a password.");
+                throw new Exception("Please fill in your password.");
             }
         }
 
@@ -248,15 +248,13 @@ class User
     }
 
 
-    public function deleteUser()
+    public function deleteUser($userid)
     {
-        $userId = $_SESSION['user_id'];
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("DELETE FROM user
-                                    WHERE id=:id");
-        $statement->bindValue(':id', $userId);
-        $statement->execute();
+        $statement = $conn->prepare("DELETE FROM user WHERE userid=:id");
+        $statement->bindValue(':id', $userid);
+        return $statement->execute();
     }
 
 
