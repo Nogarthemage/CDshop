@@ -1,13 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+*{
+	outline:none;
+	box-sizing: border-box;
+}
+
+a{
+	color: #7697a0;
+}
+
+a:hover, a:active, .productlist a:focus{
+	color: #94b0b7;
+}
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+}
+
+h1{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	color: #4a707a;
+	font-size: 25px;
+	line-height: 30px;
+	margin-bottom: 15px;
+}
+
+h2,h3{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	color: #4a707a;
+	font-size: 18px;
+	line-height: 25px;
+	text-transform: uppercase;
+}
+
+.callout.alert{
+	margin: 1rem 0 1rem 0;
+}
+
+.notice{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	color: #4a707a;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.errorfound{
+	border-style: solid;
+	border-width: thin;
+	border-color: red;
+}
+
+.menu{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+}
+
+.menu li{
+	float: left;
+}
+
+.banners{
+	margin-bottom: 25px !important;
+}
+
 .productlist{
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+
 }
 
 .productlist li{
-	float: left;
-	display: inline-block;
-	background-color: red;
-	width: 33.33%;
-	height: 150px;
+
+	background-color: #ddddda;
+	width: 24%;
+
+	padding: 10px;
+	margin: 3px;
+
+	text-align: center;
 }
+
+.productlist .title{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 20px;
+	margin-bottom: 10px;
+	color: #4a707a;
+}
+
+.productlist img{
+	margin-bottom: 10px;
+}
+
+.productlist .price{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+.productlist .button{
+	padding: 10px 15px;
+	background-color: #7697a0;
+
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	margin-bottom: 0px;
+}
+
+.productlist .button:hover, .productlist .button:active, .productlist .button:focus{
+	background-color: #94b0b7;
+}
+
+
+@media screen and (max-width: 40em) {
+	.productlist li{
+		width: 100%;
+	}
+}
+
+/* http://colorpalettes.net/color-palette-3955/ */
