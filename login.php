@@ -75,7 +75,7 @@ session_start();
 
                               </div>
                               <div class="large-8 columns">
-                                  <input type="submit" value="Log in">
+                                  <input type="submit" value="Log in" class="button">
                               </div>
                         </div>
 

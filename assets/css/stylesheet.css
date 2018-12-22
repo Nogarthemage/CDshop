@@ -15,7 +15,7 @@ a:hover, a:active, .productlist a:focus{
 
 body{
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 h1{
@@ -24,7 +24,7 @@ h1{
 	color: #4a707a;
 	font-size: 25px;
 	line-height: 30px;
-	margin-bottom: 15px;
+	margin-bottom: 35px;
 }
 
 h2,h3{
@@ -35,6 +35,15 @@ h2,h3{
 	line-height: 25px;
 	text-transform: uppercase;
 }
+
+.small{
+	font-size: 12px;
+}
+
+.button{
+	margin-bottom: 0px;
+}
+
 
 .callout.alert{
 	margin: 1rem 0 1rem 0;
@@ -131,6 +140,53 @@ h2,h3{
 	background-color: #94b0b7;
 }
 
+/* administration */
+
+.cards{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+			flex-direction: row;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+
+}
+
+.cards li{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	width: 25%;
+	margin: 5px;
+}
+
+.card{
+	border: 1px solid #cacaca;
+	background: #f9f9f9;
+}
+
+.card{
+	border: 1px solid #cacaca;
+	background: #f9f9f9;
+
+	padding: 25px;
+	text-align: center;
+}
+
+.card.button{
+	font-size: 24px;
+}
+
+.admin .button{
+	margin-bottom: 15px;
+}
 
 @media screen and (max-width: 40em) {
 	.productlist li{

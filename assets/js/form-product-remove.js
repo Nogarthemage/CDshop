@@ -1,18 +1,25 @@
 $(document).ready(function(e) {
 
-	$('.form-remove-product').on( "submit", function( event ) {
+	$('.button-remove').on( "click", function( event ) {
 		event.preventDefault();
 
 		var tableRow = $(this).parent().parent();
+		var productid = $(this).data('productid');
+		console.log('productid: ' + productid);
+
+
 		$.ajax({
 		  type: 'POST',
 		  url: "../ajax/product-remove.php",
-		  data:  $(this).serialize(),
+		  data:  { productid: productid},
 		  success: function(data){
 
 			   if(data.success){
 				   $('.callout.alert').html(data.message).slideDown();
 				   tableRow.remove();
+				   setTimeout(function(){
+					 $('.callout.alert').slideUp();
+				   }, 2000);
 			   }else{
 				   $('.callout.alert').html(data.message).slideDown();
 			   }
@@ -20,10 +27,8 @@ $(document).ready(function(e) {
 		   }
 		});
 
+
 	});
-
-
-
 
 
 });

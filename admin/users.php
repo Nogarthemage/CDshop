@@ -18,21 +18,21 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CD shop</title>
+    <title>Users | CD shop</title>
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/foundation.css">
     <link rel="stylesheet" href="../assets/css/all.css">
     <link rel="stylesheet" href="../assets/css/stylesheet.css">
   </head>
-  <body>
+  <body class="admin">
 
-    <?php include('../assets/incl/header-admin.php'); ?>
+    <?php include('../assets/incl/header.php'); ?>
 
 
     <div class="row">
           <div class="medium-12 columns">
                 <h1>User Administration</h1>
-                <a href="user-add.php" class="button"><i class="fas fa-plus-square"></i> Add User</a>
+                <a href="users-add.php" class="button add"><i class="fas fa-plus-square"></i> Add User</a>
 
                 <div class="row">
                     <div class="large-12 columns">
@@ -68,15 +68,17 @@
                                 <td><?php echo $user['level'] ?></td>
                                 <td class="text-right">
 
-                                <form class="form-edit-user">
-                                      <input type="hidden" name="userid" value="<?php echo $user['userid']; ?>" >
-                                      <input type="submit" value="Edit" class="button" />
-                                </form>
+                                <a class="button" href="users-edit.php?userid=<?php echo $user['userid']; ?>">Edit</a>
 
-                                <form class="form-remove-user">
-                                      <input type="hidden" name="userid" value="<?php echo $user['userid']; ?>" >
-                                      <input type="submit" value="Remove" class="button" >
-                                </form>
+                                <?php
+                                if($user['userid'] != $userid ) {
+                                ?>
+                                 <a class="button button-remove" data-userid="<?php echo $user['userid']; ?>" href="#">Remove</a>
+
+
+                                <?php
+                                }
+                                ?>
                               </tr>
 
                           <?php
@@ -84,17 +86,10 @@
                           }
                           ?>
 
-
-
-
                       </tbody>
                     </table>
           </div>
     </div>
-
-
-
-
 
 
     <script src="../assets/js/vendor/jquery.js"></script>

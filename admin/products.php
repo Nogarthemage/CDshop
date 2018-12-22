@@ -19,29 +19,29 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CD shop</title>
+    <title>Administration - products | CD shop</title>
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/foundation.css">
     <link rel="stylesheet" href="../assets/css/all.css">
     <link rel="stylesheet" href="../assets/css/stylesheet.css">
   </head>
-  <body>
+  <body class="admin">
 
-    <?php include('../assets/incl/header-admin.php'); ?>
+    <?php include('../assets/incl/header.php'); ?>
 
 
     <div class="row">
           <div class="medium-12 columns">
                 <h1>Product Administration</h1>
-<a href="product-add.php" class="button"><i class="fas fa-plus-square"></i> Add Product</a>
+                <a href="products-add.php" class="button add"><i class="fas fa-plus-square"></i> Add Product</a>
 
-<div class="row">
-    <div class="large-12 columns">
-                <div class="callout alert" style="display:none;">
+                <div class="row">
+                    <div class="large-12 columns">
+                                <div class="callout alert" style="display:none;">
 
+                                </div>
+                    </div>
                 </div>
-    </div>
-</div>
 
                 <table>
                   <thead>
@@ -64,15 +64,8 @@
                             <td><?php echo $product['name']; ?></td>
                             <td><?php echo $product['artist']; ?></td>
                             <td class="text-right">
-                                <form class="form-edit-product">
-                                      <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>" >
-                                      <input type="submit" value="Edit" class="button" />
-                                </form>
-
-                                <form class="form-remove-product">
-                                      <input type="hidden" name="productid" value="<?php echo $product['productid']; ?>" >
-                                      <input type="submit" value="Remove" class="button" >
-                                </form>
+                                <a class="button" href="products-edit.php?productid=<?php echo $product['productid']; ?>">Edit</a>
+                                <a class="button button-remove" data-productid="<?php echo $product['productid']; ?>" href="#">Remove</a>
                             </td>
                           </tr>
 

@@ -208,22 +208,17 @@ class User
         }
     }
 
-    public function update()
+    public function updateUserByID($userid)
     {
-        $_SESSION["user_firstname"] = $this->firstname;
-        $_SESSION["user_lastname"] = $this->lastname;
-        $_SESSION["user_email"] = $this->email;
-        $_SESSION["user_password"] = $this->password;
+
         $conn = Db::getInstance();
         if (empty($this->password)) {
-            $statement = $conn->prepare("UPDATE users
-                                        SET firstname = :firstname, lastname = :lastname, email = :email
+            $statement = $conn->prepare("UPDATE user
+                                        SET firstname = :firstname, lastname = :lastname, email = :email, level = :level
                                         WHERE userid = :id");
-        } elseif (strlen($this->password) < 6) {
-            throw new Exception("Please fill in password with at least 6 characters.");
         } else {
-            $statement = $conn->prepare("UPDATE users
-                                        SET firstname = :firstname, lastname = :lastname, email = :email, password = :password
+            $statement = $conn->prepare("UPDATE user
+                                        SET firstname = :firstname, lastname = :lastname, email = :email, level = :level, password = :password
                                         WHERE userid = :id");
             $options = ["cost" => 12];
             $hash = password_hash($this->password, PASSWORD_DEFAULT, $options);
@@ -232,7 +227,18 @@ class User
         $statement->bindValue(":firstname", $this->getFirstname());
         $statement->bindValue(":lastname", $this->getLastname());
         $statement->bindValue(":email", $this->getEmail());
-        $statement->bindValue(":id", $_SESSION["user_id"]);
+        $statement->bindValue(":level", $this->getLevel());
+        $statement->bindValue(":id", $userid);
+
+        //if admin updating himself, update session variables
+        if($_SESSION["user_id"] == $userid){
+            $_SESSION["user_firstname"] = $this->firstname;
+            $_SESSION["user_lastname"] = $this->lastname;
+            $_SESSION["user_email"] = $this->email;
+            $_SESSION["user_level"] = $this->level;
+        }
+
+
         return $statement->execute();
     }
 

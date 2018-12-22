@@ -66,7 +66,7 @@
 
                               </div>
                               <div class="large-8 columns">
-                                  <input type="submit" value="Register">
+                                  <input type="submit" value="Register" class="button">
                               </div>
                         </div>
 
