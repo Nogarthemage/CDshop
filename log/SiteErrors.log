@@ -1,3 +1,4 @@
 Error logged: 2018-12-23 21:42:54 - [ 0 ]: Please fill in your email. in file /Applications/MAMP/htdocs/private/CDshop/classes/CDshop/User.class.php on line 57
 Error logged: 2018-12-23 21:42:55 - [ 0 ]: Please fill in your email. in file /Applications/MAMP/htdocs/private/CDshop/classes/CDshop/User.class.php on line 57
 Error logged: 2018-12-23 21:44:46 - [ 0 ]: Please fill in your email. in file /Applications/MAMP/htdocs/private/CDshop/classes/CDshop/User.class.php on line 57
+Error logged: 2018-12-23 22:03:29 - [ 0 ]: Incorrect email and/or password. in file /Applications/MAMP/htdocs/private/CDshop/classes/CDshop/User.class.php on line 208
