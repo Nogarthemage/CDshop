@@ -72,16 +72,16 @@
 
                     <strong>Type</strong>
 
-                     <form id="filtertype">
+                     <form id="form-filter">
                         <div class="row">
                             <div class="large-12 columns">
-                                <input type="checkbox" id="type_album" name="album" >
+                                <input type="checkbox" id="type_album" name="param_filter_album" value="1" checked>
                                 <label for="type_album">Album</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-12 columns">
-                                <input type="checkbox" id="type_single" name="single" >
+                                <input type="checkbox" id="type_single" name="param_filter_single" value="1" checked>
                                 <label for="type_single">Single</label>
                             </div>
                         </div>
@@ -91,17 +91,25 @@
             </div>
             <div class="medium-10 columns">
 
-                <form id="search">
-                   <div class="row">
-                       <div class="large-offset-7 large-5 columns">
-                           <input type="text" id="search" name="album" placeholder="Search" >
+                <div class="row">
+                       <div class="large-6 columns">
+                           <form id="form-sort"  method="post">
+                               sort by:
+                               <input type="radio" id="sort_name" name="param_sort" value="name" ><label for="sort_name">Name</label>
+                               <input type="radio" id="sort_price" name="param_sort" value="price" checked ><label for="sort_price">Price</label>
+                           </form>
                        </div>
-                   </div>
+                       <div class="large-6 columns">
+                           <form id="form-search"  method="post">
+                             <input type="text" name="param_search" placeholder="Search & Enter" >
+                           </form>
+                       </div>
+                </div>
 
-               </form>
 
 
-                <ul class="productlist">
+
+                <ul id="productlist" class="productlist product-button-wrapper">
                     <?php
                     if(!empty($allProducts) > 0)
                     {
@@ -132,11 +140,32 @@
             </div>
       </div>
 
+      <script id="list-products-filtered" type="text/x-handlebars-template">
+          {{#each this.products}}
+          <li>
+              <div class="title"><a href="detail.php?productid={{productid}}">{{this.name}}</a></div>
+              <a href="detail.php?productid={{this.productid}}"><img src="assets/img/cds/{{this.cover}}" alt="{{this.name}}" title="{{this.name}} ({{this.type}})"></a>
+              <div class="price">{{this.price}} Euro</div>
+              <?php if($isUserLoggedIn){ ?>
+              <a href="#" class="button button-add-product" data-productid="{{this.productid}}"><i class="fas fa-shopping-cart"></i> Add to cart</a>
+                <?php }else{ ?>
+               <div class="notice"><a href="login.php">Please login to purchase.</a></div>
+          <?php } ?>
+          </li>
+          {{/each}}
+      </script>
+
+
+
+
 
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/foundation.js"></script>
+    <script src="assets/js/vendor/handlebars-v4.0.12.js"></script>
     <script src="assets/js/app.js"></script>
 
+    <script src="assets/js/form-products-filter.js"></script>
     <script src="assets/js/form-shoppingcart-add.js"></script>
+
   </body>
 </html>

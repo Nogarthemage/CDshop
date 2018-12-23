@@ -55,7 +55,7 @@ $(document).ready(function(e) {
 				$('.errorfield').slideUp();
 				checkEmail();
 			}else{
-				 $('.errorfield .callout').html('Please fill in all the fields.');
+				$('.errorfield .callout').html('Please fill in all the fields.');
 				$('.errorfield').slideDown();
 			}
 

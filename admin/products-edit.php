@@ -107,8 +107,8 @@ use CDshop\Product;
                                         </div>
                                         <div class="large-8 columns">
                                             <select name="type">
-                                              <option value="album" <?php if($selectedProduct['type'] == 'album'){ echo 'selected'; } ?>>album</option>
-                                              <option value="single" <?php if($selectedProduct['type'] == 'single'){ echo 'selected'; } ?>>single</option>
+                                              <option value="album" <?php if(strtolower($selectedProduct['type']) == 'album'){ echo 'selected'; } ?>>album</option>
+                                              <option value="single" <?php if(strtolower($selectedProduct['type']) == 'single'){ echo 'selected'; } ?>>single</option>
                                             </select>
 
                                         </div>

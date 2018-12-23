@@ -11,6 +11,10 @@
     $product = new Product();
     $selectedProduct = $product->getProduct($_REQUEST['productid']);
 
+    if(!$selectedProduct ){
+            header('Location: index.php');
+    }
+
 ?><!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
@@ -59,7 +63,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row product-button-wrapper">
                         <div class="large-12 columns">
                             <?php if($isUserLoggedIn){ ?>
                                 <a href="#" class="button button-add-product" data-productid="<?php echo $selectedProduct['productid']; ?>"><i class="fas fa-shopping-cart"></i> Add to cart</a>

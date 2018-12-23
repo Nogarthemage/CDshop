@@ -148,7 +148,7 @@ class Product
     {
         try {
             $conn = Db::getInstance();
-            $stmt = $conn->prepare("SELECT * from product ORDER BY productid DESC");
+            $stmt = $conn->prepare("SELECT * from product ORDER BY price ASC");
             $stmt->execute();
             $products = $stmt->fetchAll();
             return $products;
@@ -238,25 +238,34 @@ class Product
     }
 
 
-    public function searchProducts($query)
+    public function searchProducts($param_search, $param_sort, $filter_album, $filter_single)
     {
-        //todo
+        try {
+            $conn = Db::getInstance();
+
+            if( $filter_album && !$filter_single ){
+                //echo '>filter album';
+                $statement = $conn->prepare("SELECT * from product where (name LIKE :param_search OR artist LIKE :param_search) AND type = 'album' ORDER BY $param_sort ASC");
+            }else if( !$filter_album && $filter_single ){
+                //echo '>filter single';
+                $statement = $conn->prepare("SELECT * from product where (name LIKE :param_search OR artist LIKE :param_search) AND type = 'single'  ORDER BY $param_sort ASC");
+            }else if( $filter_album && $filter_single ){
+               // echo '>filter album and single';
+                $statement = $conn->prepare("SELECT * from product where (name LIKE :param_search OR artist LIKE :param_search) AND (type = 'album' OR type = 'single') ORDER BY $param_sort ASC");
+            }else{
+               // echo 'dont filter album and or single';
+                //filter out different from =  type single or type album
+                $statement = $conn->prepare("SELECT * from product where (name LIKE :param_search OR artist LIKE :param_search) AND (type != 'single' AND type != 'album') ORDER BY $param_sort ASC");
+            }
+            $statement->bindValue(':param_search', '%' . $param_search . '%');
+
+            $statement->execute();
+            $products = $statement->fetchAll();
+            return $products;
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            return $error;
+        }
     }
-
-    public function filterProducts($query)
-    {
-        //todo
-    }
-
-    public function orderProducts($query)
-    {
-        //todo
-    }
-
-    // filtering: https://stackoverflow.com/questions/33493048/ajax-filter-php-mysql-results-using-checkboxes-or-radio-button-on-same-page
-
-
-
-
 
 }

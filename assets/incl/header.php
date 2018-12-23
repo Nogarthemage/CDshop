@@ -1,3 +1,4 @@
+<header>
 <?php if($isAdmin){ ?>
 <div class="bar">
 	 <div class="callout primary">
@@ -64,3 +65,4 @@
 	  </div>
 </div>
 <?php } ?>
+</header>

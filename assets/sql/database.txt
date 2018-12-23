@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 23, 2018 at 09:23 AM
+-- Generation Time: Dec 23, 2018 at 09:14 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -36,7 +36,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orderid`, `orderdate`, `totalprice`, `userid`, `shippingfirstname`, `shippinglastname`, `shippingaddress`, `paymenttype`) VALUES
-(1, '2018-12-23 09:11:00', 65, 1, 'Ben', 'Van Looy', 'straat nr, land', 'bancontact');
+(1, '2018-12-23 09:11:00', 65, 1, 'Ben', 'Van Looy', 'straat nr, land', 'bancontact'),
+(2, '2018-12-23 14:16:00', 15, 17, 'blabla', 'blabla', 'adres', 'bancontact');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,9 @@ CREATE TABLE `order_detail` (
 
 INSERT INTO `order_detail` (`orderid`, `productid`, `quantity`) VALUES
 (1, 22, 1),
-(1, 23, 2);
+(1, 23, 2),
+(2, 1, 1),
+(2, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -82,30 +85,32 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `banner`, `genre`, `type`, `releasedate`, `price`) VALUES
-(1, 'The Back Eyed Peas', 'I Gotta Feeling', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '1.jpg', '1-banner.jpg', 'Pop', 'Single', '2009-06-16', '5.00'),
-(2, 'Shania Twain', 'Come On Over', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '2.jpg', '', 'Country', 'Album', '1997-11-04', '21.00'),
-(3, 'Santana ft. Rob Thomas', 'Smooth', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '3.jpg', '', 'Rock', 'Single', '1999-06-29', '5.00'),
-(4, 'Nas', 'Illmatic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '4.jpg', '', 'Hip-Hop', 'Album', '1994-04-19', '22.50'),
-(5, 'Chic and Nile Rodgers', 'Up All Night', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '5.jpg', '', 'Disco', 'Album', '2013-07-01', '20.00'),
-(6, 'LeAnn Rimes', 'How Do I Live', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '6.jpg', '', 'Country', 'Single', '1999-05-27', '5.00'),
-(7, 'Kool & The Gang', 'Open Sesame', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '7.jpg', '', 'Disco', 'Album', '1976-11-01', '25.00'),
-(8, 'Olivia Newton-John', 'Physical', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '8.jpg', '', 'Pop', 'Single', '1981-09-28', '5.00'),
-(9, 'David Bowie', 'Heathen', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '9.jpg', '', 'Rock', 'Album', '2002-06-11', '20.50'),
-(10, 'Ratatat', 'Classics', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '10.jpg', '', 'Rock', 'Album', '2006-08-22', '15.00'),
-(11, 'Chic', 'Le Freak', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '11.jpg', '', 'Disco', 'Single', '1978-09-21', '5.00'),
-(12, 'Tupac Shakur', 'All Eyez on Me', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '12.jpg', '', 'Hip-Hop', 'Album', '1996-02-13', '17.00'),
-(13, 'Survivor', 'Eye Of The Tiger', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '13.jpg', '', 'Rock', 'Single', '1982-02-01', '5.00'),
-(14, 'Flo Rida ft. T Pain', 'Low', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '14.jpg', '', 'Hip-Hop', 'Single', '2007-10-09', '5.00'),
-(15, 'Taylor Swift', 'Fearless', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '15.jpg', '', 'Country', 'Album', '2008-11-11', '18.50'),
-(16, 'Adele', 'Rolling in the Deep', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '16.jpg', '', 'Pop', 'Single', '2011-11-29', '5.00'),
-(17, 'Eli Young Band', 'Love Ain\'t', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '17.jpg', '', 'Country', 'Single', '2018-05-26', '5.00'),
-(18, 'ABBA', 'Gold: Greatest Hits', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '18.jpg', '', 'Pop', 'Album', '1992-09-21', '25.99'),
-(19, 'Earth, Wind & Fire', 'September', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '19.jpg', '', 'Disco', 'Single', '1978-11-18', '5.00'),
-(20, 'Outkast', 'Ms. Jackson', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '20.jpg', '', 'Hip-Hop', 'Single', '2000-10-24', '5.00'),
-(21, 'Justin Bieber', 'Believe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '21.jpg', '', 'Pop', 'Album', '2012-06-15', '28.00'),
-(22, 'Hooverphonic', 'Looking for stars', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '22.jpg', '22-banner.jpg', 'Pop', 'Album', '2018-11-16', '25.00'),
+(1, 'The Back Eyed Peas', 'I Gotta Feeling', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '1.jpg', '1-banner.jpg', 'Pop', 'single', '2009-06-15', '100.00'),
+(2, 'Shania Twain', 'Come On Over', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '2.jpg', '', 'Country', 'album', '1997-11-04', '21.00'),
+(3, 'Santana ft. Rob Thomas', 'Smooth', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '3.jpg', '', 'Rock', 'single', '1999-06-29', '5.00'),
+(4, 'Nas', 'Illmatic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '4.jpg', '', 'Hip-Hop', 'album', '1994-04-19', '22.50'),
+(5, 'Chic and Nile Rodgers', 'Up All Night', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '5.jpg', '', 'Disco', 'album', '2013-07-01', '20.00'),
+(6, 'LeAnn Rimes', 'How Do I Live', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '6.jpg', '', 'Country', 'single', '1999-05-27', '5.00'),
+(7, 'Kool & The Gang', 'Open Sesame', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '7.jpg', '', 'Disco', 'album', '1976-11-01', '25.00'),
+(8, 'Olivia Newton-John', 'Physical', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '8.jpg', '', 'Pop', 'single', '1981-09-28', '5.00'),
+(9, 'David Bowie', 'Heathen', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '9.jpg', '', 'Rock', 'album', '2002-06-11', '20.50'),
+(10, 'Ratatat', 'Classics', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '10.jpg', '', 'Rock', 'album', '2006-08-22', '15.00'),
+(11, 'Chic', 'Le Freak', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '11.jpg', '', 'Disco', 'single', '1978-09-21', '5.00'),
+(12, 'Tupac Shakur', 'All Eyez on Me', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '12.jpg', '', 'Hip-Hop', 'album', '1996-02-13', '17.00'),
+(13, 'Survivor', 'Eye Of The Tiger', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '13.jpg', '', 'Rock', 'single', '1982-02-01', '5.00'),
+(14, 'Flo Rida ft. T Pain', 'Low', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '14.jpg', '', 'Hip-Hop', 'single', '2007-10-09', '5.00'),
+(15, 'Taylor Swift', 'Fearless', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '15.jpg', '', 'Country', 'album', '2008-11-11', '18.50'),
+(16, 'Adele', 'Rolling in the Deep', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '16.jpg', '', 'Pop', 'single', '2011-11-29', '5.00'),
+(17, 'Eli Young Band', 'Love Ain\'t', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '17.jpg', '', 'Country', 'single', '2018-05-26', '5.00'),
+(18, 'ABBA', 'Gold: Greatest Hits', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '18.jpg', '', 'Pop', 'album', '1992-09-21', '25.99'),
+(19, 'Earth, Wind & Fire', 'September', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '19.jpg', '', 'Disco', 'single', '1978-11-18', '5.00'),
+(20, 'Outkast', 'Ms. Jackson', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '20.jpg', '', 'Hip-Hop', 'single', '2000-10-24', '5.00'),
+(21, 'Justin Bieber', 'Believe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '21.jpg', '', 'Pop', 'album', '2012-06-15', '28.00'),
+(22, 'Hooverphonic', 'Looking for stars', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '22.jpg', '22-banner.jpg', 'Pop', 'album', '2018-11-16', '25.00'),
 (23, 'The Greatest Showman', 'Greatest Showman', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '23.jpg', '23-banner.jpg', 'Soundtrack', 'album', '2017-12-08', '20.00'),
-(24, 'test', 'name', 'description', '', '', 'genre', 'single', '2019-04-05', '7.00');
+(30, 'testtest', 'test', 'test', 'default.jpg', '', '', 'album', '2019-01-01', '5.00'),
+(31, 'Sia', 'Everyday Is Christmas', 'Everyday Is Christmas is the eighth studio album and first Christmas album by Australian singer-songwriter Sia, released by Atlantic Records and Monkey Puzzle on 17 November 2017. The album is her debut album with Atlantic. The album features original songs co-written and produced with Greg Kurstin.', '31.jpg', '', 'pop', 'album', '2017-11-17', '30.00'),
+(32, 'Sia', '1000 Forms of Fear', '1000 Forms of Fear is the sixth studio album by Australian singer Sia. It was released on 4 July 2014 by Monkey Puzzle and RCA Records worldwide, and Inertia Records in Australia. Primarily an electropop album, the record also incorporates influences from reggae and hip hop.', '32.jpg', '', 'pop', 'album', '2014-07-04', '40.00');
 
 -- --------------------------------------------------------
 
@@ -130,7 +135,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`userid`, `firstname`, `lastname`, `email`, `password`, `level`, `regdate`) VALUES
 (1, 'Ben', 'Van Looy', 'benvanlooy@gmail.com', '$2y$12$wkR33HwLfM5/enR82AswNe5.r8GyNzBggFfG6mF6mLaNRkQrYEgpO', 'admin', '2018-12-18 23:47:00'),
 (15, 'benbenben', 'benben', 'benben@gmail.com', '$2y$12$HU9iECFgqTLfvg7/DJvwpO9kXHM9Bf0sjvSTxJMwrfeqB4D8uN/q2', 'member', '2018-12-21 21:32:00'),
-(16, 'user11', 'lastname', 'user11@gmail.com', '$2y$12$w3MngsbUEo0Wc5mKEXYSDe97sbSegDEyru7UiNtuB1Ng1fU4Lh4bC', 'admin', '2018-12-22 10:50:00');
+(16, 'user11', 'lastname', 'user11@gmail.com', '$2y$12$w3MngsbUEo0Wc5mKEXYSDe97sbSegDEyru7UiNtuB1Ng1fU4Lh4bC', 'admin', '2018-12-22 10:50:00'),
+(17, 'blabla', 'blabla', 'blabla@gmail.com', '$2y$12$s2N3pCDaLvdrVJ1Vp.eTt.vJS19eukcpfEdQ0fEHTetYDXlTH7Qfi', 'admin', '2018-12-23 14:13:00');
 
 --
 -- Indexes for dumped tables
@@ -163,16 +169,16 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;

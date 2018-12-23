@@ -1,33 +1,25 @@
 $(document).ready(function(e) {
 
-	$('.button-add-product').on( "click", function( event ) {
+	$('.product-button-wrapper').on( "click", ".button-add-product", function( event ) {
 		event.preventDefault();
 		var productid = $(this).data('productid');
+		var button = $(this);
 
 		$.ajax({
 		  type: 'POST',
 		  url: "ajax/shoppingcart-add.php",
-		  data:  { productid: productid},
+		  data:  {productid: productid},
 		  success: function(data){
 
-			  alert('product added');
-
-			  /*
-			  $('.callout.alert').html(data.message).slideDown();
+			  button.html('Product added');
 
 			  setTimeout(function(){
-				 $('.callout.alert').slideUp();
-			   }, 2000);
-
-			   if(data.success){
-				 $('#form-add-product').trigger("reset");
-			 }*/
+				button.html('<i class="fas fa-shopping-cart"></i> Add to cart');
+			  }, 2000);
 
 
 		   }
 		});
-
-
 	});
 
 

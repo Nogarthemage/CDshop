@@ -10,7 +10,7 @@ header('Content-Type: application/json');
     });
 
     $json = [
-    "success"=>true,
+    "success"=>false,
     "error"=>""
     ];
 
@@ -38,7 +38,7 @@ header('Content-Type: application/json');
 
    }else {
        $json["success"] = false;
-       $json["error"] = "E-mail cannot be empty";
+       $json["error"] = "E-mail cannot be empty.";
 
    }
 

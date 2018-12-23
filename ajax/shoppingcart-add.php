@@ -1,9 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 	session_start();
 
 	use CDshop\Shoppingcart;
@@ -18,7 +13,7 @@ error_reporting(E_ALL);
 
 	$json = [
 		"success"=>false,
-		"message"=>"Item was not added to shoppingcart"
+		"message"=>"Item was not added to shoppingcart."
 	];
 
 	if($productid){
