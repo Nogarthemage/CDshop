@@ -111,7 +111,7 @@
 
                     <li>
                         <div class="title"><a href="detail.php?productid=<?php echo $singleProduct['productid']; ?>"><?php echo $singleProduct['name']; ?></a></div>
-                        <a href="detail.php?productid=<?php echo $singleProduct['productid']; ?>"><img src="assets/img/cds/<?php echo $singleProduct['productid']; ?>.jpg" alt="<?php echo $singleProduct['name']; ?>"></a>
+                        <a href="detail.php?productid=<?php echo $singleProduct['productid']; ?>"><img src="assets/img/cds/<?php echo $singleProduct['cover']; ?>" alt="<?php echo $singleProduct['name']; ?>"></a>
                         <div class="price"><?php echo $singleProduct['price']; ?> Euro</div>
                              <?php if($isUserLoggedIn){ ?>
                                  <a href="#" class="button button-add-product" data-productid="<?php echo $singleProduct['productid']; ?>"><i class="fas fa-shopping-cart"></i> Add to cart</a>

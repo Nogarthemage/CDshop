@@ -77,7 +77,7 @@ use CDshop\Product;
                                             <label>Cover</label>
                                         </div>
                                         <div class="large-8 columns">
-                                            <input type="text" name="cover">
+                                            <input type="text" name="cover" value="default.jpg">
                                         </div>
                                   </div>
                                   <div class="row">
@@ -123,7 +123,7 @@ use CDshop\Product;
                                             <label>Price</label>
                                         </div>
                                         <div class="large-8 columns">
-                                            <input type="number" name="price">
+                                            <input type="number" name="price" value="5">
                                         </div>
                                   </div>
 

@@ -29,7 +29,7 @@
 
       <div class="row">
             <div class="medium-5 columns">
-                <img src="assets/img/cds/<?php echo $selectedProduct['productid']; ?>.jpg" >
+                <img src="assets/img/cds/<?php echo $selectedProduct['cover']; ?>" >
             </div>
             <div class="medium-7 columns">
 
