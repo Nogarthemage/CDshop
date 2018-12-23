@@ -52,7 +52,7 @@ session_start();
             <div class="medium-6 columns medium-centered">
                 <div class="callout">
 
-                    <form action="" method="post">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                         <div class="row">
                               <div class="large-4 columns">
                                   <label>E-mail</label>

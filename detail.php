@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <?php if($isUserLoggedIn){ ?>
-                                <a href="#" class="button" data-productid="<?php echo $singleProduct['productid']; ?>"><i class="fas fa-shopping-cart"></i> Add to cart</a>
+                                <a href="#" class="button button-add-product" data-productid="<?php echo $selectedProduct['productid']; ?>"><i class="fas fa-shopping-cart"></i> Add to cart</a>
                             <?php }else{ ?>
                                  <div class="notice"><a href="login.php">Please login to purchase.</a></div>
                             <?php } ?>
@@ -79,5 +79,7 @@
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/foundation.js"></script>
     <script src="assets/js/app.js"></script>
+
+    <script src="assets/js/form-shoppingcart-add.js"></script>
   </body>
 </html>

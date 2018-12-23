@@ -5,7 +5,6 @@ $(document).ready(function(e) {
 
 		var tableRow = $(this).parent().parent();
 		var userid = $(this).data('userid');
-		console.log('userid: ' + userid);
 
 
 		$.ajax({
@@ -27,7 +26,7 @@ $(document).ready(function(e) {
 		   }
 		});
 
-		
+
 	});
 
 
