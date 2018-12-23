@@ -2,6 +2,7 @@
 <?php
 
 use CDshop\User;
+use CDshop\Errorlog;
 
     spl_autoload_register(function ($class) {
         include_once("classes/". str_replace('\\', '/', $class) . ".class.php");
@@ -20,7 +21,12 @@ use CDshop\User;
         }
     } catch (Exception $e) {
         $error = $e->getMessage();
+
+        $Errorlog = new Errorlog();
+        $Errorlog->writeError($e);
     }
+
+
 
 ?><!doctype html>
 <html class="no-js" lang="en" dir="ltr">
