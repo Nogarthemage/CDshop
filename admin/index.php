@@ -1,6 +1,6 @@
 <?php include('../assets/incl/global.php'); ?>
 <?php
-    if(!$isAdmin  ){
+    if(!$isAdmin){
             header('Location: ../login.php');
     }
 ?><!doctype html>
@@ -33,8 +33,14 @@
                     </li>
 
                     <li>
-                        <a href="products.php" class="card button">
+                        <a href="users.php" class="card button">
                            <i class="fas fa-users"></i><br>Users
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="orders.php" class="card button">
+                           <i class="fas fa-shopping-cart"></i><br>Orders
                         </a>
                     </li>
                 </ul>

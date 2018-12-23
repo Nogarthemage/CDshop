@@ -1,6 +1,6 @@
 <?php include('../assets/incl/global.php'); ?>
 <?php
-    use CDshop\User;
+    use CDshop\Order;
 
     spl_autoload_register(function ($class) {
         include_once("../classes/". str_replace('\\', '/', $class) . ".class.php");
@@ -10,15 +10,15 @@
             header('Location: ../login.php');
     }
 
-    $user = new User();
-    $users = $user->getUsers();
+    $order = new Order();
+    $orders = $order->getOrders();
 ?><!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users | CD shop</title>
+    <title>Orders | CD shop</title>
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/foundation.css">
     <link rel="stylesheet" href="../assets/css/all.css">
@@ -28,11 +28,9 @@
 
     <?php include('../assets/incl/header.php'); ?>
 
-
     <div class="row">
           <div class="medium-12 columns">
-                <h1>User Administration</h1>
-                <a href="users-add.php" class="button add"><i class="fas fa-plus-square"></i> Add User</a>
+                <h1>Order overview</h1>
 
                 <div class="row">
                     <div class="large-12 columns">
@@ -45,40 +43,29 @@
                 <table>
                       <thead>
                         <tr>
-                          <th width="">Firstname</th>
-                          <th width="">Lastname</th>
-                          <th width="">E-mail</th>
-                          <th width="">Level</th>
-                          <th width=""></th>
+                          <th>Order Number</th>
+                          <th>Order Date</th>
+                          <th>Client</th>
+                          <th>TotalPrice</th>
+                          <th>Paid with</th>
                         </tr>
                       </thead>
                       <tbody>
 
                           <?php
-                          if(!empty($users) > 0)
+                          if(!empty($orders) > 0)
                           {
-                              foreach($users as $user)
+                              foreach($orders as $order)
                               {
                           ?>
 
                               <tr>
-                                <td><?php echo $user['firstname']; ?></td>
-                                <td><?php echo $user['lastname']; ?></td>
-                                <td><?php echo $user['email']; ?></td>
-                                <td><?php echo $user['level'] ?></td>
-                                <td class="text-right">
+                                <td><?php echo $order['orderid']; ?></td>
+                                <td><?php echo $order['orderdate']; ?></td>
+                                <td><?php echo $order['shippingfirstname'] . '  ' . $order['shippinglastname']; ?></td>
+                                <td>€ <?php echo $order['totalprice']; ?></td>
+                                <td><?php echo $order['paymenttype']; ?></td>
 
-                                <a class="button" href="users-edit.php?userid=<?php echo $user['userid']; ?>"><i class="far fa-edit"></i> Edit</a>
-
-                                <?php
-                                if($user['userid'] != $userid ) {
-                                ?>
-                                 <a class="button button-remove" data-userid="<?php echo $user['userid']; ?>" href="#"><i class="far fa-trash-alt"></i> Remove</a>
-
-
-                                <?php
-                                }
-                                ?>
                               </tr>
 
                           <?php
@@ -95,8 +82,6 @@
     <script src="../assets/js/vendor/jquery.js"></script>
     <script src="../assets/js/vendor/foundation.js"></script>
     <script src="../assets/js/app.js"></script>
-
-    <script src="../assets/js/form-user-remove.js"></script>
 
   </body>
 </html>

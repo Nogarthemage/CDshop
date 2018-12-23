@@ -86,13 +86,6 @@
       </div>
 
 
-      <div class="row">
-            <div class="large-12 columns">
-               <h1>Your Orders</h1>
-            </div>
-      </div>
-
-
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/foundation.js"></script>
     <script src="assets/js/app.js"></script>

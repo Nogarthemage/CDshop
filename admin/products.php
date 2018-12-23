@@ -64,8 +64,8 @@
                             <td><?php echo $product['name']; ?></td>
                             <td><?php echo $product['artist']; ?></td>
                             <td class="text-right">
-                                <a class="button" href="products-edit.php?productid=<?php echo $product['productid']; ?>">Edit</a>
-                                <a class="button button-remove" data-productid="<?php echo $product['productid']; ?>" href="#">Remove</a>
+                                <a class="button" href="products-edit.php?productid=<?php echo $product['productid']; ?>"><i class="far fa-edit"></i> Edit</a>
+                                <a class="button button-remove" data-productid="<?php echo $product['productid']; ?>" href="#"><i class="far fa-trash-alt"></i> Remove</a>
                             </td>
                           </tr>
 

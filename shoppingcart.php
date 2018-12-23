@@ -31,9 +31,8 @@
     <div class="row">
           <div class="medium-12 columns">
                 <h2>SHOPPINGCART</h2>
-                <p>Please check your shoppingcart & fill in the details to make your purchase.</p>
 
-                    <table class="stack">
+                    <table  id="shoppingcartlist" class="stack">
                      <thead>
                          <tr>
                          <th>Item Name</th>
@@ -56,7 +55,7 @@
                      <td><?php echo $values["item_quantity"]; ?></td>
                      <td>€ <?php echo $values["item_price"]; ?></td>
                      <td>€ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
-                     <td><a href="#" data-productid="<?php echo $values["item_id"]; ?>" class="button button-remove-product">Remove</a></td>
+                     <td><a href="#" data-productid="<?php echo $values["item_id"]; ?>" class="button button-remove-product"><i class="far fa-trash-alt"></i> Remove</a></td>
                     </tr>
                    <?php
                      $total = $total + ($values["item_quantity"] * $values["item_price"]);
@@ -81,9 +80,90 @@
                    </table>
 
 
-                    <h2>Your Details</h2>
+                    <h2>Your Shipping Details</h2>
+
+                    <div class="row">
+
+                          <div class="medium-7 columns ">
+                              <div class="callout">
+
+                                  <form id="form-place-order" action="" method="post">
+                                      <div class="row">
+                                            <div class="large-4 columns">
+                                                <label>First name</label>
+                                            </div>
+                                            <div class="large-8 columns">
+                                                <input type="text" name="shippingfirstname" value="<?php echo $firstname; ?>" >
+                                            </div>
+                                      </div>
+                                      <div class="row">
+                                            <div class="large-4 columns">
+                                                <label>Last name</label>
+                                            </div>
+                                            <div class="large-8 columns">
+                                                <input type="text" name="shippinglastname" value="<?php echo $lastname ?>" >
+                                            </div>
+                                      </div>
+                                      <div class="row">
+                                            <div class="large-4 columns">
+                                                <label>Shipping Address</label>
+                                            </div>
+                                            <div class="large-8 columns">
+                                                <textarea name="shippingaddress"></textarea>
+                                            </div>
+                                      </div>
+
+                                      <div class="row">
+                                            <div class="large-4 columns">
+                                                <label>Paymenttype</label>
+                                            </div>
+                                            <div class="large-8 columns">
+                                                <select name="paymenttype">
+                                                  <option value="paypal">Paypal</option>
+                                                  <option value="bancontact">Bancontact</option>
+                                                </select>
+                                            </div>
+                                      </div>
 
 
+
+
+                                      <div class="row">
+                                            <div class="large-4 columns">
+
+                                            </div>
+                                            <div class="large-8 columns">
+                                                <input type="submit" value="Place your order" class="button">
+                                            </div>
+                                      </div>
+
+                                      <div class="row">
+                                            <div class="large-12 columns">
+                                                <div class="errorfield" style="display:none;">
+                                                    <div class="callout alert">
+                                                     Please fill in all the fields.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                      </div>
+
+
+
+                                  </form>
+
+                                  <div class="form-success" style="display:none">
+                                      Thanks for your order.</a>
+                                  </div>
+                                  <div class="form-error" style="display:none">
+                                       Something went wrong, please try again.
+                                  </div>
+
+
+                              </div>
+
+                          </div>
+                    </div>
 
           </div>
     </div>
@@ -93,7 +173,8 @@
     <script src="assets/js/vendor/foundation.js"></script>
     <script src="assets/js/app.js"></script>
 
-     <script src="assets/js/form-shoppingcart-remove.js"></script>
+    <script src="assets/js/form-shoppingcart-remove.js"></script>
+    <script src="assets/js/form-validation-order.js"></script>
 
   </body>
 </html>

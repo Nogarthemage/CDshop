@@ -10,6 +10,7 @@
 
 		  <div class="medium-6 columns text-right">
 			  <ul class="menu">
+			   <li><a href="<?php echo $siteRoot; ?>/admin/orders.php">Orders</a></li>
   			   <li><a href="<?php echo $siteRoot; ?>/admin/products.php">Products</a></li>
   			   <li><a href="<?php echo $siteRoot; ?>/admin/users.php">Users</a></li>
   			 </ul>
