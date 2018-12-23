@@ -52,7 +52,7 @@
 	  <div class="row">
 			<div class="medium-6 columns">
 				<ul class="menu">
-				   <li><a href="<?php echo $siteRoot; ?>/admin">CDSHOP</a></li>
+				   <li><a href="<?php echo $siteRoot; ?>">CDSHOP</a></li>
 				 </ul>
 			</div>
 			<div class="medium-6 columns text-right">

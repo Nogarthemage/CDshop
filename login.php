@@ -1,8 +1,7 @@
+<?php include('assets/incl/global.php'); ?>
 <?php
 
 use CDshop\User;
-
-session_start();
 
     spl_autoload_register(function ($class) {
         include_once("classes/". str_replace('\\', '/', $class) . ".class.php");

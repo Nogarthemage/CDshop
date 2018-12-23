@@ -1,3 +1,4 @@
+<?php include('assets/incl/global.php'); ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
