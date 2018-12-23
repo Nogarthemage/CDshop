@@ -1,22 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 18, 2018 at 02:59 PM
--- Server version: 5.6.34-log
--- PHP Version: 7.2.1
+-- Host: localhost:8889
+-- Generation Time: Dec 23, 2018 at 09:23 AM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
 -- Database: `cdshop`
 --
-CREATE DATABASE IF NOT EXISTS `cdshop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cdshop`;
 
 -- --------------------------------------------------------
 
@@ -24,13 +20,23 @@ USE `cdshop`;
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `orderid` int(9) NOT NULL,
   `orderdate` datetime NOT NULL,
-  `totalprice` int(9) NOT NULL,
-  `userid` int(9) NOT NULL
+  `totalprice` int(9) NOT NULL DEFAULT '0',
+  `userid` int(9) NOT NULL,
+  `shippingfirstname` varchar(255) NOT NULL,
+  `shippinglastname` varchar(255) NOT NULL,
+  `shippingaddress` varchar(255) NOT NULL,
+  `paymenttype` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderid`, `orderdate`, `totalprice`, `userid`, `shippingfirstname`, `shippinglastname`, `shippingaddress`, `paymenttype`) VALUES
+(1, '2018-12-23 09:11:00', 65, 1, 'Ben', 'Van Looy', 'straat nr, land', 'bancontact');
 
 -- --------------------------------------------------------
 
@@ -38,12 +44,19 @@ CREATE TABLE `orders` (
 -- Table structure for table `order_detail`
 --
 
-DROP TABLE IF EXISTS `order_detail`;
 CREATE TABLE `order_detail` (
   `orderid` int(9) NOT NULL,
   `productid` int(9) NOT NULL,
   `quantity` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+INSERT INTO `order_detail` (`orderid`, `productid`, `quantity`) VALUES
+(1, 22, 1),
+(1, 23, 2);
 
 -- --------------------------------------------------------
 
@@ -51,44 +64,48 @@ CREATE TABLE `order_detail` (
 -- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `productid` int(9) NOT NULL,
   `artist` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `cover` varchar(255) NOT NULL,
+  `banner` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `releasedate` date NOT NULL
+  `releasedate` date NOT NULL,
+  `price` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `genre`, `type`, `releasedate`) VALUES
-(1, 'The Back Eyed Peas', 'I Gotta Feeling', '', '1.jpg', 'Pop', 'Single', '2009-06-16'),
-(2, 'Shania Twain', 'Come On Over', '', '2.jpg', 'Country', 'Album', '1997-11-04'),
-(3, 'Santana ft. Rob Thomas', 'Smooth', '', '3.jpg', 'Rock', 'Single', '1999-06-29'),
-(4, 'Nas', 'Illmatic', '', '4.jpg', 'Hip-Hop', 'Album', '1994-04-19'),
-(5, 'Chic and Nile Rodgers', 'Up All Night', '', '5.jpg', 'Disco', 'Album', '2013-07-01'),
-(6, 'LeAnn Rimes', 'How Do I Live', '', '6.jpg', 'Country', 'Single', '1999-05-27'),
-(7, 'Kool & The Gang', 'Open Sesame', '', '7.jpg', 'Disco', 'Album', '1976-11-01'),
-(8, 'Olivia Newton-John', 'Physical', '', '8.jpg', 'Pop', 'Single', '1981-09-28'),
-(9, 'David Bowie', 'Heathen', '', '9.jpg', 'Rock', 'Album', '2002-06-11'),
-(10, 'Ratatat', 'Classics', '', '10.jpg', 'Rock', 'Album', '2006-08-22'),
-(11, 'Chic', 'Le Freak', '', '11.jpg', 'Disco', 'Single', '1978-09-21'),
-(12, 'Tupac Shakur', 'All Eyez on Me', '', '12.jpg', 'Hip-Hop', 'Album', '1996-02-13'),
-(13, 'Survivor', 'Eye Of The Tiger', '', '13.jpg', 'Rock', 'Single', '1982-02-01'),
-(14, 'Flo Rida ft. T Pain', 'Low', '', '14.jpg', 'Hip-Hop', 'Single', '2007-10-09'),
-(15, 'Taylor Swift', 'Fearless', '', '15.jpg', 'Country', 'Album', '2008-11-11'),
-(16, 'Adele', 'Rolling in the Deep', '', '16.jpg', 'Pop', 'Single', '2011-11-29'),
-(17, 'Eli Young Band', 'Love Ain\'t', '', '17.jpg', 'Country', 'Single', '2018-05-26'),
-(18, 'ABBA', 'Gold: Greatest Hits', '', '18.jpg', 'Pop', 'Album', '1992-09-21'),
-(19, 'Earth, Wind & Fire', 'September', '', '19.jpg', 'Disco', 'Single', '1978-11-18'),
-(20, 'Outkast', 'Ms. Jackson', '', '20.jpg', 'Hip-Hop', 'Single', '2000-10-24'),
-(21, 'Justin Bieber', 'Believe', '', '21.jpg', 'Pop', 'Album', '2012-06-15');
+INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `banner`, `genre`, `type`, `releasedate`, `price`) VALUES
+(1, 'The Back Eyed Peas', 'I Gotta Feeling', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '1.jpg', '1-banner.jpg', 'Pop', 'Single', '2009-06-16', '5.00'),
+(2, 'Shania Twain', 'Come On Over', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '2.jpg', '', 'Country', 'Album', '1997-11-04', '21.00'),
+(3, 'Santana ft. Rob Thomas', 'Smooth', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '3.jpg', '', 'Rock', 'Single', '1999-06-29', '5.00'),
+(4, 'Nas', 'Illmatic', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '4.jpg', '', 'Hip-Hop', 'Album', '1994-04-19', '22.50'),
+(5, 'Chic and Nile Rodgers', 'Up All Night', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '5.jpg', '', 'Disco', 'Album', '2013-07-01', '20.00'),
+(6, 'LeAnn Rimes', 'How Do I Live', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '6.jpg', '', 'Country', 'Single', '1999-05-27', '5.00'),
+(7, 'Kool & The Gang', 'Open Sesame', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '7.jpg', '', 'Disco', 'Album', '1976-11-01', '25.00'),
+(8, 'Olivia Newton-John', 'Physical', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '8.jpg', '', 'Pop', 'Single', '1981-09-28', '5.00'),
+(9, 'David Bowie', 'Heathen', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '9.jpg', '', 'Rock', 'Album', '2002-06-11', '20.50'),
+(10, 'Ratatat', 'Classics', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '10.jpg', '', 'Rock', 'Album', '2006-08-22', '15.00'),
+(11, 'Chic', 'Le Freak', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '11.jpg', '', 'Disco', 'Single', '1978-09-21', '5.00'),
+(12, 'Tupac Shakur', 'All Eyez on Me', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '12.jpg', '', 'Hip-Hop', 'Album', '1996-02-13', '17.00'),
+(13, 'Survivor', 'Eye Of The Tiger', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '13.jpg', '', 'Rock', 'Single', '1982-02-01', '5.00'),
+(14, 'Flo Rida ft. T Pain', 'Low', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '14.jpg', '', 'Hip-Hop', 'Single', '2007-10-09', '5.00'),
+(15, 'Taylor Swift', 'Fearless', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '15.jpg', '', 'Country', 'Album', '2008-11-11', '18.50'),
+(16, 'Adele', 'Rolling in the Deep', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '16.jpg', '', 'Pop', 'Single', '2011-11-29', '5.00'),
+(17, 'Eli Young Band', 'Love Ain\'t', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '17.jpg', '', 'Country', 'Single', '2018-05-26', '5.00'),
+(18, 'ABBA', 'Gold: Greatest Hits', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '18.jpg', '', 'Pop', 'Album', '1992-09-21', '25.99'),
+(19, 'Earth, Wind & Fire', 'September', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '19.jpg', '', 'Disco', 'Single', '1978-11-18', '5.00'),
+(20, 'Outkast', 'Ms. Jackson', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '20.jpg', '', 'Hip-Hop', 'Single', '2000-10-24', '5.00'),
+(21, 'Justin Bieber', 'Believe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '21.jpg', '', 'Pop', 'Album', '2012-06-15', '28.00'),
+(22, 'Hooverphonic', 'Looking for stars', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '22.jpg', '22-banner.jpg', 'Pop', 'Album', '2018-11-16', '25.00'),
+(23, 'The Greatest Showman', 'Greatest Showman', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum nibh. Aenean nec ligula enim. Nam varius faucibus quam, eget ullamcorper neque placerat ac. Nullam est libero, porta a bibendum sit amet, commodo eu ex. ', '23.jpg', '23-banner.jpg', 'Soundtrack', 'album', '2017-12-08', '20.00'),
+(24, 'test', 'name', 'description', '', '', 'genre', 'single', '2019-04-05', '7.00');
 
 -- --------------------------------------------------------
 
@@ -96,7 +113,6 @@ INSERT INTO `product` (`productid`, `artist`, `name`, `description`, `cover`, `g
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userid` int(9) NOT NULL,
   `firstname` varchar(255) NOT NULL,
@@ -106,6 +122,15 @@ CREATE TABLE `user` (
   `level` varchar(255) NOT NULL,
   `regdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`userid`, `firstname`, `lastname`, `email`, `password`, `level`, `regdate`) VALUES
+(1, 'Ben', 'Van Looy', 'benvanlooy@gmail.com', '$2y$12$wkR33HwLfM5/enR82AswNe5.r8GyNzBggFfG6mF6mLaNRkQrYEgpO', 'admin', '2018-12-18 23:47:00'),
+(15, 'benbenben', 'benben', 'benben@gmail.com', '$2y$12$HU9iECFgqTLfvg7/DJvwpO9kXHM9Bf0sjvSTxJMwrfeqB4D8uN/q2', 'member', '2018-12-21 21:32:00'),
+(16, 'user11', 'lastname', 'user11@gmail.com', '$2y$12$w3MngsbUEo0Wc5mKEXYSDe97sbSegDEyru7UiNtuB1Ng1fU4Lh4bC', 'admin', '2018-12-22 10:50:00');
 
 --
 -- Indexes for dumped tables
@@ -127,7 +152,8 @@ ALTER TABLE `product`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`userid`);
+  ADD PRIMARY KEY (`userid`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -137,14 +163,16 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `productid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `userid` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
