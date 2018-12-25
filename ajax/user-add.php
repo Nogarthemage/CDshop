@@ -12,6 +12,7 @@
 	$lastname 		= isset($_REQUEST['lastname'])? $_REQUEST['lastname']: '';
 	$email 			= isset($_REQUEST['email'])? $_REQUEST['email']: '';
 	$level 			= isset($_REQUEST['level'])? $_REQUEST['level']: '';
+	$password 		= isset($_REQUEST['password'])? $_REQUEST['password']: '';
 
 	$json = [
 		"success"=>false,
@@ -25,6 +26,7 @@
 		$user->setLastname($lastname);
 		$user->setEmail($email);
 		$user->setLevel($level);
+		$user->setPassword($password);
 
 	    if( $user->register() ){
 			$json["success"] = true;

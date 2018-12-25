@@ -71,6 +71,14 @@ use CDshop\User;
                                   </div>
                                   <div class="row">
                                         <div class="large-4 columns">
+                                            <label>Password </label>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input type="password" name="password" >
+                                        </div>
+                                  </div>
+                                  <div class="row">
+                                        <div class="large-4 columns">
                                             <label>Level</label>
                                         </div>
                                         <div class="large-8 columns">
